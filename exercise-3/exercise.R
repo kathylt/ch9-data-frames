@@ -16,15 +16,14 @@ US_personal_exp_df <- data.frame(USPersonalExpenditure, stringsAsFactors = FALSE
 
 # What are the column names of your dataframe?
 colnames(US_personal_exp_df)
-"X1940" "X1945" "X1950" "X1955" "X1960"
+
 
 ## Consider: why are they so strange? Think about whether you could use a number 
 ## like 1940 with dollar notation!
 
+
 # What are the row names of your dataframe?
 rownames(US_personal_exp_df)
-"Food and Tobacco"    "Household Operation" "Medical and Health" 
-"Personal Care"       "Private Education"  
 
 # Add a column "category" to your data frame that contains the rownames
 US_personal_exp_df$category <- rownames(US_personal_exp_df)
@@ -36,13 +35,14 @@ US_personal_exp_df["Personal Care", "X1940"]
 US_personal_exp_df["Food and Tobacco", "X1960"]
 
 # What was the highest expenditure category in 1960?
-max(US_personal_exp_df$X1960)
+highest_1960 <- US_personal_exp_df$category[US_personal_exp_df$X1960 == max(US_personal_exp_df$X1960)]
 
 # Define a function `lowest_category` that takes in a year as a parameter, and
 # returns the lowest spending category of that year
 lowest_category <- function(year) {
-  min(category, year)
-}
+  col <- paste0('X', year)
+  US_personal_exp_df$category[US_personal_exp_df[, col] == min(US_personal_exp_df[, col])]
+  }
 
 # Using your function, determine the lowest spending category of each year
 # Hint: use the `sapply()` function to apply your function to a vector of years
